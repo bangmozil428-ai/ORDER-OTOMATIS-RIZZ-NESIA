@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JASTEB RIZZ NESIA 🪐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #00aaff;
+            --neon-blue: #00d4ff;
+            --dark-blue: #0066cc;
+            --space-black: #0a0a2e;
+            --space-dark: #1a1a4e;
+            --white: #ffffff;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--space-black) 0%, #0d0d3a 50%, #050515 100%);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating Rocket */
+        .rocket {
+            position: fixed;
+            right: 20%;
+            font-size: 30px;
+            animation: fly 12s linear infinite;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) rotate(45deg); opacity: 0; }
+        }
+
+        /* Planet */
+        .planet {
+            position: fixed;
+            top: 15%;
+            right: 8%;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #8e2de2, #4a00e0);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 35px 20px;
+            background: linear-gradient(180deg, rgba(0,100,255,0.12) 0%, transparent 100%);
+            border-radius: 0 0 40px 40px;
+            margin: -20px -20px 25px -20px;
+            border-bottom: 1px solid rgba(0,150,255,0.15);
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-blue), #fff, var(--neon-blue));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 2.5s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .tagline {
+            color: #6699cc;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+
+        /* Card Section */
+        .section {
+            background: rgba(10,20,55,0.75);
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(0,150,255,0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .section-title {
+            font-size: 1.05em;
+            color: var(--neon-blue);
+            margin-bottom: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '✦';
+        }
+
+        /* Package Options */
+        .package-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pkg-item input {
+            display: none;
+        }
+
+        .pkg-item label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, rgba(0,70,200,0.12) 0%, rgba(0,30,100,0.08) 100%);
+            border: 1.5px solid rgba(0,150,255,0.18);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .pkg-item label:hover {
+            border-color: rgba(0,200,255,0.45);
+            transform: translateX(4px);
+        }
+
+        .pkg-item input:checked + label {
+            background: linear-gradient(135deg, rgba(0,150,255,0.28) 0%, rgba(0,80,200,0.18) 100%);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0,150,255,0.3);
+        }
+
+        .pkg-name {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .pkg-result {
+            font-size: 0.9em;
+            color: #88aadd;
+            background: rgba(0,0,0,0.35);
+            padding: 4px 12px;
+            border-radius: 18px;
+        }
+
+        /* Payment Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .pay-item input {
+            display: none;
+        }
+
+        .pay-item label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 14px 10px;
+            background: rgba(0,45,110,0.12);
+            border: 1.5px solid rgba(0,150,255,0.18);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 500;
+        }
+
+        .pay-item label:hover {
+            border-color: rgba(0,200,255,0.45);
+        }
+
+        .pay-item input:checked + label {
+            background: linear-gradient(135deg, rgba(0,150,255,0.3) 0%, rgba(0,70,180,0.2) 100%);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 18px rgba(0,150,255,0.35);
+        }
+
+        .pay-icon {
+            font-size: 1.4em;
+        }
+
+        /* Order Button */
+        .order-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #00cc66 0%, #00994d 100%);
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 35px rgba(0,204,102,0.45);
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+            padding: 18px;
+            color: #6688aa;
+            font-size: 0.88em;
+        }
+
+        .contact a {
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            color: #445566;
+            font-size: 0.78em;
+        }
+
+        @media (max-width: 460px) {
+            .logo { font-size: 1.65em; }
+            .container { padding: 15px; }
+            .section { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="stars" id="stars"></div>
+    <div class="planet"></div>
+    <div class="rocket">🚀</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">🪐 JASTEB RIZZ NESIA 🪐</div>
+            <div class="tagline">✨ Layanan Terpercaya & Profesional ✨</div>
+        </header>
+
+        <!-- Package List -->
+        <div class="section">
+            <div class="section-title">PILIH PAKET</div>
+            <div class="package-list">
+                <div class="pkg-item">
+                    <input type="radio" id="p1" name="paket" value="1K" data-result="25 Result">
+                    <label for="p1">
+                        <span class="pkg-name">1K</span>
+                        <span class="pkg-result">25 Result</span>
+                    </label>
+                </div>
+                <div class="pkg-item">
+                    <input type="radio" id="p2" name="paket" value="2K" data-result="35 Result">
+                    <label for="p2">
+                        <span class="pkg-name">2K</span>
+                        <span class="pkg-result">35 Result</span>
+                    </label>
+                </div>
+                <div class="pkg-item">
+                    <input type="radio" id="p3" name="paket" value="3K" data-result="45 Result">
+                    <label for="p3">
+                        <span class="pkg-name">3K</span>
+                        <span class="pkg-result">45 Result</span>
+                    </label>
+                </div>
+                <div class="pkg-item">
+                    <input type="radio" id="p4" name="paket" value="4K" data-result="55 Result">
+                    <label for="p4">
+                        <span class="pkg-name">4K</span>
+                        <span class="pkg-result">55 Result</span>
+                    </label>
+                </div>
+                <div class="pkg-item">
+                    <input type="radio" id="p5" name="paket" value="5K" data-result="65 Result">
+                    <label for="p5">
+                        <span class="pkg-name">5K</span>
+                        <span class="pkg-result">65 Result</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="section">
+            <div class="section-title">METODE PEMBAYARAN</div>
+            <div class="payment-grid">
+                <div class="pay-item">
+                    <input type="checkbox" id="dana" name="payment" value="DANA">
+                    <label for="dana">
+                        <span class="pay-icon">💙</span>
+                        <span>DANA</span>
+                    </label>
+                </div>
+                <div class="pay-item">
+                    <input type="checkbox" id="gopay" name="payment" value="GOPAY">
+                    <label for="gopay">
+                        <span class="pay-icon">🟢</span>
+                        <span>GOPAY</span>
+                    </label>
+                </div>
+                <div class="pay-item">
+                    <input type="checkbox" id="shopee" name="payment" value="SHOPEE PAY">
+                    <label for="shopee">
+                        <span class="pay-icon">🟠</span>
+                        <span>SHOPEE PAY</span>
+                    </label>
+                </div>
+                <div class="pay-item">
+                    <input type="checkbox" id="qris" name="payment" value="QRIS">
+                    <label for="qris">
+                        <span class="pay-icon">💚</span>
+                        <span>QRIS</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Button -->
+        <button class="order-btn" onclick="kirimPesanan()">
+            🚀 ORDER SEKARANG
+        </button>
+
+        <!-- Contact -->
+        <div class="contact">
+            <p>📱 Hubungi: <a href="https://wa.me/6282162086944">+6282-1620-8694-4</a></p>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>🪐 JASTEB RIZZ NESIA 🪐</p>
+            <p>Terpercaya Seit 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create Stars
+        function createStars() {
+            const container = document.getElementById('stars');
+            for(let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 2 + 1;
+                star.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    width: ${size}px;
+                    height: ${size}px;
+                    animation-duration: ${Math.random() * 2 + 2}s;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                container.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Send Order
+        function kirimPesanan() {
+            const paket = document.querySelector('input[name="paket"]:checked');
+            const payments = document.querySelectorAll('input[name="payment"]:checked');
+            
+            if(!paket) {
+                alert('Silakan pilih paket terlebih dahulu!');
+                return;
+            }
+            
+            if(payments.length === 0) {
+                alert('Silakan pilih metode pembayaran!');
+                return;
+            }
+            
+            let payList = '';
+            payments.forEach((p, i) => {
+                payList += p.value;
+                if(i < payments.length - 1) payList += ', ';
+            });
+            
+            const pesan = `*PESANAN JASTEB RIZZ NESIA 🪐*
+
+📦 *Paket:* ${paket.value}
+🎁 *Result:* ${paket.dataset.result}
+💰 *Pembayaran:* ${payList}
+────────────────────────────────
+✅ Mohon dicek, terima kasih!
+
+🪐 JASTEB RIZZ NESIA`;
+            
+            window.open(`https://wa.me/6282162086944?text=${encodeURIComponent(pesan)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
